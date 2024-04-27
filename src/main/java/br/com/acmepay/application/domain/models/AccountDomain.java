@@ -1,13 +1,13 @@
-package br.com.acmepay.domain;
+package br.com.acmepay.application.domain.models;
 
-import br.com.acmepay.exception.BalanceToWithdrawException;
+import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class AccountDomain {
 
     private Long id;
     private Integer number;
@@ -20,16 +20,16 @@ public class Account {
     private LocalDateTime updated_at;
     private List<String> transactions = new ArrayList<>();
 
-    public void create(Account account) {
-        this.setId(account.id);
+    public void create(AccountDomain accountDomain) {
+        this.setId(accountDomain.id);
         this.setCreated_at(LocalDateTime.now());
         this.setUpdated_at(null);
         this.setCustomer(null);
         this.setCards(new ArrayList<>());
         this.setBalance(BigDecimal.ZERO);
-        this.setNumber(account.number);
-        this.setAgency(account.agency);
-        this.setClose(account.close);
+        this.setNumber(accountDomain.number);
+        this.setAgency(accountDomain.agency);
+        this.setClose(accountDomain.close);
         this.transactions.add("account created successfully at: " + this.getCreated_at());
     }
 
@@ -48,9 +48,9 @@ public class Account {
         }
     }
 
-    public void transfer(Account destAccount, BigDecimal amount) throws BalanceToWithdrawException {
+    public void transfer(AccountDomain destAccountDomain, BigDecimal amount) throws BalanceToWithdrawException {
         this.withdraw(amount);
-        destAccount.deposit(amount);
+        destAccountDomain.deposit(amount);
         this.transactions.add(LocalDateTime.now().toString() + " transaction successfully, amount: " + amount.toString());
     }
 

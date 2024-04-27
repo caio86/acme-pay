@@ -1,7 +1,7 @@
-package br.com.acmepay.domain;
+package br.com.acmepay.application.domain.models;
 
-import br.com.acmepay.exception.CustomerWithDocumentNotExists;
-import br.com.acmepay.exception.CustomerWithIdNotExists;
+import br.com.acmepay.application.domain.exception.CustomerWithDocumentNotExists;
+import br.com.acmepay.application.domain.exception.CustomerWithIdNotExists;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
-public class Customer {
+public class CustomerDomain {
     private Long id;
     private String name;
     private String email;
@@ -18,29 +18,29 @@ public class Customer {
 //    private List<Account> accounts;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private static final List<Customer> customerList = new ArrayList<>();
+    private static final List<CustomerDomain> CUSTOMER_DOMAIN_LIST = new ArrayList<>();
 
     // create
-    public void create(Customer customer) {
-        this.setId(customer.id);
+    public void create(CustomerDomain customerDomain) {
+        this.setId(customerDomain.id);
         this.setCreated_at(LocalDateTime.now());
         this.setUpdated_at(null);
-        this.setName(customer.name);
-        this.setEmail(customer.email);
-        this.setPhone(customer.phone);
-        this.setDocument(customer.document);
-        Customer.customerList.add(this);
+        this.setName(customerDomain.name);
+        this.setEmail(customerDomain.email);
+        this.setPhone(customerDomain.phone);
+        this.setDocument(customerDomain.document);
+        CustomerDomain.CUSTOMER_DOMAIN_LIST.add(this);
     }
 
     // list
-    public static List<Customer> list() {
-        return Customer.customerList;
+    public static List<CustomerDomain> list() {
+        return CustomerDomain.CUSTOMER_DOMAIN_LIST;
     }
 
     // delete
     public static void delete(Long id) throws Exception {
-        int customerIndex = IntStream.range(0, Customer.customerList.size())
-                .filter(num -> Customer.customerList.get(num).getId().equals(id))
+        int customerIndex = IntStream.range(0, CustomerDomain.CUSTOMER_DOMAIN_LIST.size())
+                .filter(num -> CustomerDomain.CUSTOMER_DOMAIN_LIST.get(num).getId().equals(id))
                 .findFirst()
                 .orElse(-1);
 
@@ -51,12 +51,12 @@ public class Customer {
             );
         }
 
-        Customer.customerList.remove(customerIndex);
+        CustomerDomain.CUSTOMER_DOMAIN_LIST.remove(customerIndex);
     }
     // update
     public static void update(Long id) throws Exception {
-        int customerIndex = IntStream.range(0, Customer.customerList.size())
-                .filter(num -> Customer.customerList.get(num).getId().equals(id))
+        int customerIndex = IntStream.range(0, CustomerDomain.CUSTOMER_DOMAIN_LIST.size())
+                .filter(num -> CustomerDomain.CUSTOMER_DOMAIN_LIST.get(num).getId().equals(id))
                 .findFirst()
                 .orElse(-1);
 
@@ -65,10 +65,10 @@ public class Customer {
         }
     }
     // getByCustomerDocument
-    public static Customer getByCustomerDocument(String document) throws Exception {
-        Optional<Customer> foundCustomer = Customer.customerList
+    public static CustomerDomain getByCustomerDocument(String document) throws Exception {
+        Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
                 .stream()
-                .filter(customer -> customer.getDocument().equals(document))
+                .filter(customerDomain -> customerDomain.getDocument().equals(document))
                 .findFirst();
 
         if (foundCustomer.isEmpty()) {
@@ -80,10 +80,10 @@ public class Customer {
         return foundCustomer.get();
     }
 
-    public static Customer getById(Long id) throws Exception {
-        Optional<Customer> foundCustomer = Customer.customerList
+    public static CustomerDomain getById(Long id) throws Exception {
+        Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
                 .stream()
-                .filter(customer -> customer.getId().equals(id))
+                .filter(customerDomain -> customerDomain.getId().equals(id))
                 .findFirst();
 
         if (foundCustomer.isEmpty()) {
@@ -96,9 +96,9 @@ public class Customer {
     }
 
     public static Boolean existsByCustomerDocument(String document) throws Exception {
-        Optional<Customer> foundCustomer = Customer.customerList
+        Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
                 .stream()
-                .filter(customer -> customer.getDocument().equals(document))
+                .filter(customerDomain -> customerDomain.getDocument().equals(document))
                 .findFirst();
 
         if (foundCustomer.isEmpty()) {
@@ -110,9 +110,9 @@ public class Customer {
         return true;
     }
     public static Boolean existsById(Long id) throws Exception {
-        Optional<Customer> foundCustomer = Customer.customerList
+        Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
                 .stream()
-                .filter(customer -> customer.getId().equals(id))
+                .filter(customerDomain -> customerDomain.getId().equals(id))
                 .findFirst();
 
         if (foundCustomer.isEmpty()) {

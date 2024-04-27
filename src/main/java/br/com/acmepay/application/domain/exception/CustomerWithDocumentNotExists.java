@@ -1,4 +1,4 @@
-package br.com.acmepay.exception;
+package br.com.acmepay.application.domain.exception;
 
 public class CustomerWithDocumentNotExists extends Exception {
     public CustomerWithDocumentNotExists() {

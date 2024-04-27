@@ -1,10 +1,7 @@
 package br.com.acmepay;
 
-import br.com.acmepay.domain.Account;
-import br.com.acmepay.domain.Customer;
-import br.com.acmepay.exception.BalanceToWithdrawException;
-
-import java.math.BigDecimal;
+import br.com.acmepay.application.domain.models.CustomerDomain;
+import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 
 /**
  * Hello world!
@@ -14,9 +11,9 @@ public class App
 {
     public static void main( String[] args ) throws BalanceToWithdrawException, Exception
     {
-        Customer c1 = new Customer();
-        Customer c2 = new Customer();
-        Customer c3 = new Customer();
+        CustomerDomain c1 = new CustomerDomain();
+        CustomerDomain c2 = new CustomerDomain();
+        CustomerDomain c3 = new CustomerDomain();
 
         c1.setId(1L);
         c2.setId(2L);
@@ -42,16 +39,16 @@ public class App
         c2.create(c2);
         c3.create(c3);
 
-        System.out.println(Customer.list());
-        for (Customer customer: Customer.list()) {
-            System.out.println(customer.getEmail());
+        System.out.println(CustomerDomain.list());
+        for (CustomerDomain customerDomain : CustomerDomain.list()) {
+            System.out.println(customerDomain.getEmail());
         }
 
-        Customer.delete(3L);
+        CustomerDomain.delete(3L);
 
-        System.out.println(Customer.list());
-        for (Customer customer: Customer.list()) {
-            System.out.println(customer.getEmail());
+        System.out.println(CustomerDomain.list());
+        for (CustomerDomain customerDomain : CustomerDomain.list()) {
+            System.out.println(customerDomain.getEmail());
         }
     }
 }
