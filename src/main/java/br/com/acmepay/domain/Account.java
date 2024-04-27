@@ -49,7 +49,7 @@ public class Account {
         }
     }
 
-    public void transfer(BigDecimal amount, Account destAccount) throws BalanceToWithdrawException {
+    public void transfer(Account destAccount, BigDecimal amount) throws BalanceToWithdrawException {
         this.withdraw(amount);
         destAccount.deposit(amount);
     }
