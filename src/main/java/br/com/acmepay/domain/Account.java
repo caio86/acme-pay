@@ -42,7 +42,7 @@ public class Account {
     }
 
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
-        if (this.balance.compareTo(amount) >= 0) {
+        if (checkTransfer(amount)) {
             this.balance = this.balance.subtract(amount);
         } else {
             throw new BalanceToWithdrawException("error withdraw");
@@ -52,6 +52,10 @@ public class Account {
     public void transfer(BigDecimal amount, Account destAccount) throws BalanceToWithdrawException {
         this.withdraw(amount);
         destAccount.deposit(amount);
+    }
+
+    private boolean checkTransfer(BigDecimal amount) {
+        return this.balance.compareTo(amount) >= 0;
     }
 
     public Long getId() {
