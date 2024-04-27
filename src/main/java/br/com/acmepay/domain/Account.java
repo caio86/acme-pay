@@ -49,6 +49,11 @@ public class Account {
         }
     }
 
+    public void transfer(BigDecimal amount, Account destAccount) throws BalanceToWithdrawException {
+        this.withdraw(amount);
+        destAccount.deposit(amount);
+    }
+
     public Long getId() {
         return id;
     }
