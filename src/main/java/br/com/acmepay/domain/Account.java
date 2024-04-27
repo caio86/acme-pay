@@ -18,33 +18,32 @@ public class Account {
     private List<Integer> cards;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private List<Account> accountsCreated = new ArrayList<>();
+    private List<String> transactions = new ArrayList<>();
 
     public void create(Account account) {
         this.setId(account.id);
         this.setCreated_at(LocalDateTime.now());
         this.setUpdated_at(null);
-        this.setCustomer(createCustomer());
+        this.setCustomer(null);
         this.setCards(new ArrayList<>());
         this.setBalance(BigDecimal.ZERO);
         this.setNumber(account.number);
         this.setAgency(account.agency);
         this.setClose(account.close);
-        this.accountsCreated.add(this);
-    }
-
-    private String createCustomer() {
-        return "mock customer";
+        this.transactions.add("account created successfully at: " + this.getCreated_at());
     }
 
     public void deposit(BigDecimal amount) {
         this.balance = this.balance.add(amount);
+        this.transactions.add(LocalDateTime.now().toString() + " deposit successfully, amount: " + amount.toString());
     }
 
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
         if (checkTransfer(amount)) {
             this.balance = this.balance.subtract(amount);
+            this.transactions.add(LocalDateTime.now().toString() + " withdraw successfully, amount: " + amount.toString());
         } else {
+            this.transactions.add(LocalDateTime.now().toString() + " Error to withdraw, amount: " + amount.toString());
             throw new BalanceToWithdrawException("error withdraw");
         }
     }
@@ -52,6 +51,14 @@ public class Account {
     public void transfer(Account destAccount, BigDecimal amount) throws BalanceToWithdrawException {
         this.withdraw(amount);
         destAccount.deposit(amount);
+        this.transactions.add(LocalDateTime.now().toString() + " transaction successfully, amount: " + amount.toString());
+    }
+
+    public void getTransactions() {
+        for (String transaction :
+                this.transactions) {
+            System.out.println(transaction);
+        }
     }
 
     private boolean checkTransfer(BigDecimal amount) {
