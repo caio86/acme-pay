@@ -6,7 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class AccountDomain {
 
     private Long id;
@@ -18,7 +28,7 @@ public class AccountDomain {
     private List<Integer> cards;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private List<String> transactions = new ArrayList<>();
+    private final List<String> transactions = new ArrayList<>();
 
     public void create(AccountDomain accountDomain) {
         this.setId(accountDomain.id);
@@ -64,77 +74,5 @@ public class AccountDomain {
 
     private boolean checkTransfer(BigDecimal amount) {
         return this.balance.compareTo(amount) >= 0;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Integer getNumber() {
-        return number;
-    }
-
-    public void setNumber(Integer number) {
-        this.number = number;
-    }
-
-    public Integer getAgency() {
-        return agency;
-    }
-
-    public void setAgency(Integer agency) {
-        this.agency = agency;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public Boolean getClose() {
-        return close;
-    }
-
-    public void setClose(Boolean close) {
-        this.close = close;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
-    public List<Integer> getCards() {
-        return cards;
-    }
-
-    public void setCards(List<Integer> cards) {
-        this.cards = cards;
-    }
-
-    public LocalDateTime getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
-    }
-
-    public LocalDateTime getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(LocalDateTime updated_at) {
-        this.updated_at = updated_at;
     }
 }
