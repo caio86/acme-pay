@@ -1,16 +1,14 @@
 package br.com.acmepay;
 
-import br.com.acmepay.application.domain.models.CustomerDomain;
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
+import br.com.acmepay.application.domain.models.CustomerDomain;
 
 /**
  * Hello world!
  *
  */
-public class App 
-{
-    public static void main( String[] args ) throws BalanceToWithdrawException, Exception
-    {
+public class App {
+    public static void main(String[] args) throws BalanceToWithdrawException, Exception {
         CustomerDomain c1 = new CustomerDomain();
         CustomerDomain c2 = new CustomerDomain();
         CustomerDomain c3 = new CustomerDomain();

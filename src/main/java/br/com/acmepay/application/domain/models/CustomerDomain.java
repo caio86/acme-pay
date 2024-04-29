@@ -1,13 +1,13 @@
 package br.com.acmepay.application.domain.models;
 
-import br.com.acmepay.application.domain.exception.CustomerWithDocumentNotExists;
-import br.com.acmepay.application.domain.exception.CustomerWithIdNotExists;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
+
+import br.com.acmepay.application.domain.exception.CustomerWithDocumentNotExists;
+import br.com.acmepay.application.domain.exception.CustomerWithIdNotExists;
 
 public class CustomerDomain {
     private Long id;
@@ -15,7 +15,7 @@ public class CustomerDomain {
     private String email;
     private String phone;
     private String document;
-//    private List<Account> accounts;
+    // private List<Account> accounts;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private static final List<CustomerDomain> CUSTOMER_DOMAIN_LIST = new ArrayList<>();
@@ -47,12 +47,12 @@ public class CustomerDomain {
         if (customerIndex == -1) {
             throw new Exception(
                     "Cannot delete Customer with ID: " + id
-                    + " because it does not exists"
-            );
+                            + " because it does not exists");
         }
 
         CustomerDomain.CUSTOMER_DOMAIN_LIST.remove(customerIndex);
     }
+
     // update
     public static void update(Long id) throws Exception {
         int customerIndex = IntStream.range(0, CustomerDomain.CUSTOMER_DOMAIN_LIST.size())
@@ -64,6 +64,7 @@ public class CustomerDomain {
             throw new Exception();
         }
     }
+
     // getByCustomerDocument
     public static CustomerDomain getByCustomerDocument(String document) throws Exception {
         Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
@@ -73,8 +74,7 @@ public class CustomerDomain {
 
         if (foundCustomer.isEmpty()) {
             throw new CustomerWithDocumentNotExists(
-                    "A Customer with this document: " + document + " does not exists"
-            );
+                    "A Customer with this document: " + document + " does not exists");
         }
 
         return foundCustomer.get();
@@ -88,8 +88,7 @@ public class CustomerDomain {
 
         if (foundCustomer.isEmpty()) {
             throw new CustomerWithIdNotExists(
-                    "A Customer with this ID: " + id + " does not exists"
-            );
+                    "A Customer with this ID: " + id + " does not exists");
         }
 
         return foundCustomer.get();
@@ -103,12 +102,12 @@ public class CustomerDomain {
 
         if (foundCustomer.isEmpty()) {
             throw new CustomerWithDocumentNotExists(
-                    "A Customer with this document: " + document + " does not exists"
-            );
+                    "A Customer with this document: " + document + " does not exists");
         }
 
         return true;
     }
+
     public static Boolean existsById(Long id) throws Exception {
         Optional<CustomerDomain> foundCustomer = CustomerDomain.CUSTOMER_DOMAIN_LIST
                 .stream()
@@ -117,8 +116,7 @@ public class CustomerDomain {
 
         if (foundCustomer.isEmpty()) {
             throw new CustomerWithIdNotExists(
-                    "A Customer with this ID: " + id + " does not exists"
-            );
+                    "A Customer with this ID: " + id + " does not exists");
         }
 
         return true;
@@ -165,13 +163,13 @@ public class CustomerDomain {
         this.document = document;
     }
 
-//    public List<Account> getAccounts() {
-//        return accounts;
-//    }
-//
-//    public void setAccounts(List<Account> accounts) {
-//        this.accounts = accounts;
-//    }
+    // public List<Account> getAccounts() {
+    // return accounts;
+    // }
+    //
+    // public void setAccounts(List<Account> accounts) {
+    // this.accounts = accounts;
+    // }
 
     public LocalDateTime getCreated_at() {
         return created_at;
