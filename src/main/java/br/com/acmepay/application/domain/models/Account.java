@@ -15,7 +15,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountDomain {
+public class Account {
 
     private Long id;
     private Integer number;
@@ -28,7 +28,7 @@ public class AccountDomain {
     private LocalDateTime updated_at;
     private List<String> transactions = new ArrayList<>();
 
-    public void create(AccountDomain accountDomain) {
+    public void create(Account accountDomain) {
         this.setId(accountDomain.id);
         this.setCreated_at(LocalDateTime.now());
         this.setUpdated_at(null);
@@ -57,7 +57,7 @@ public class AccountDomain {
         }
     }
 
-    public void transfer(AccountDomain destAccountDomain, BigDecimal amount) throws BalanceToWithdrawException {
+    public void transfer(Account destAccountDomain, BigDecimal amount) throws BalanceToWithdrawException {
         this.withdraw(amount);
         destAccountDomain.deposit(amount);
         this.transactions
