@@ -8,9 +8,13 @@ import java.util.stream.IntStream;
 
 import br.com.acmepay.application.domain.exception.CustomerWithDocumentNotExists;
 import br.com.acmepay.application.domain.exception.CustomerWithIdNotExists;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
     private Long id;
     private String name;
