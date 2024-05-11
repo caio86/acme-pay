@@ -15,6 +15,7 @@
   <modules>
     <module>acme-pay-account-service</module>
     <module>acme-pay-customer-service</module>
+    <module>acme-pay-transaction-service</module>
   </modules>
 
   <properties>
