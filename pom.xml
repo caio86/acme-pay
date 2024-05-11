@@ -20,6 +20,7 @@
   </modules>
 
   <properties>
+    <spring.cloud.version>2023.0.0</spring.cloud.version>
     <spring.boot.version>3.2.4</spring.boot.version>
     <lombok.version>1.18.32</lombok.version>
     <flyway.version>9.16.3</flyway.version>
@@ -27,6 +28,26 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring.cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <dependencies>
     <!-- lombok -->
