@@ -66,6 +66,14 @@
       <version>${flyway.version}</version>
     </dependency>
 
+    <!-- Postgres -->
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
