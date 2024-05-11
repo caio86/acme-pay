@@ -26,7 +26,7 @@ public class Account {
     private List<Integer> cards;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
-    private List<String> transactions = new ArrayList<>();
+    private final List<String> transactions = new ArrayList<>();
 
     public void create(Account accountDomain) {
         this.setId(accountDomain.id);
