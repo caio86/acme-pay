@@ -7,19 +7,33 @@
   <groupId>br.com.acmepay</groupId>
   <artifactId>acme-pay</artifactId>
   <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <name>acme-pay</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
+  <modules>
+    <module>acme-pay-account-service</module>
+    <module>acme-pay-customer-service</module>
+  </modules>
 
   <properties>
     <spring.boot.version>3.2.4</spring.boot.version>
+    <lombok.version>1.18.32</lombok.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
+    <!-- lombok -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
