@@ -8,7 +8,6 @@ import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @RestController

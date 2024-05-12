@@ -1,9 +1,6 @@
 package br.com.acmepay.adapters.output.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,6 +21,8 @@ public class AccountEntity {
     @SequenceGenerator(name = "account_seq",
     sequenceName = "account_seq",
     allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+    generator = "account_seq")
     private Long id;
 
     private Integer number;
