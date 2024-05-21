@@ -4,4 +4,6 @@ target
 .factorypath
 .project
 .settings/
+.env
+.envrc
 

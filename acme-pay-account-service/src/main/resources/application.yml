@@ -1,12 +1,12 @@
 server:
-  port: 8081
+  port: ${SERVER_PORT}
 
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: postgres
-    username: postgres
-    url: jdbc:postgresql://localhost:5433/account-service
+    password: ${DB_PASSWORD}
+    username: ${DB_USER}
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_DATABASE}
   jpa:
     properties:
       hibernate:
