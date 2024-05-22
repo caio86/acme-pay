@@ -1,12 +1,22 @@
 package br.com.acmepay.adapters.input.api;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import br.com.acmepay.adapters.input.api.request.AccountCreateRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 
 @RequestMapping("/api/v1/accounts")
 public interface IAccountResourceAPI {
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping
+    AccountListResponse list();
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

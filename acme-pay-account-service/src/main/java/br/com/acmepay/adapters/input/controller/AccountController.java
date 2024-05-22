@@ -1,20 +1,29 @@
 package br.com.acmepay.adapters.input.controller;
 
+import java.time.LocalDateTime;
+
+import org.springframework.web.bind.annotation.RestController;
+
 import br.com.acmepay.adapters.input.api.IAccountResourceAPI;
 import br.com.acmepay.adapters.input.api.request.AccountCreateRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
+import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @AllArgsConstructor
 public class AccountController implements IAccountResourceAPI {
 
     private final ICreateAccountUseCase createAccountUseCase;
+
+    @Override
+    public AccountListResponse list() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'list'");
+        // return AccountListResponse.builder().build();
+    }
 
     @Override
     public AccountCreateResponse create(AccountCreateRequest request) {
