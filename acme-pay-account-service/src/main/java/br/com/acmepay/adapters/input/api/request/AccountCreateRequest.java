@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AccountRequest {
+public class AccountCreateRequest {
 
     private Integer number;
     private Integer agency;
