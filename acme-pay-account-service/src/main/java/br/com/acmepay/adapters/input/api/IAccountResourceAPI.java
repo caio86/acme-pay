@@ -1,5 +1,7 @@
 package br.com.acmepay.adapters.input.api;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ public interface IAccountResourceAPI {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    AccountListResponse list();
+    List<AccountListResponse> list();
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping

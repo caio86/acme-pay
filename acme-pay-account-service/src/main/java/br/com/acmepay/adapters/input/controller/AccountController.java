@@ -1,6 +1,8 @@
 package br.com.acmepay.adapters.input.controller;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,6 +12,7 @@ import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
 import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
+import br.com.acmepay.application.ports.in.IListAccountsUseCase;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -17,12 +20,25 @@ import lombok.AllArgsConstructor;
 public class AccountController implements IAccountResourceAPI {
 
     private final ICreateAccountUseCase createAccountUseCase;
+    private final IListAccountsUseCase listAccountsUseCase;
 
     @Override
-    public AccountListResponse list() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'list'");
-        // return AccountListResponse.builder().build();
+    public List<AccountListResponse> list() {
+        var domain = listAccountsUseCase.execute();
+
+        var response = domain.stream()
+                .map(item -> AccountListResponse.builder()
+                        .id(item.getId())
+                        .number(item.getNumber())
+                        .agency(item.getAgency())
+                        .balance(item.getBalance())
+                        .close(item.getClose())
+                        .created_at(item.getCreated_at())
+                        .updated_at(item.getUpdated_at())
+                        .build())
+                .collect(Collectors.toList());
+
+        return response;
     }
 
     @Override
