@@ -5,6 +5,5 @@ target
 .project
 .settings/
 .env
-.envrc
 .direnv
 
