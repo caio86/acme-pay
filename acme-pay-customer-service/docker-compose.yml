@@ -1,5 +1,5 @@
 services:
-  postgres-account:
+  postgres-customer:
     image: postgres
     container_name: acme-pay-customer-service
     restart: always
