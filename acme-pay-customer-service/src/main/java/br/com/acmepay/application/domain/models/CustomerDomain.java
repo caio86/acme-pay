@@ -1,5 +1,7 @@
 package br.com.acmepay.application.domain.models;
 
+import br.com.acmepay.application.ports.out.ICreateCustomer;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,4 +19,8 @@ public class CustomerDomain {
     private String document;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
+
+    public String create(ICreateCustomer createCustomer) {
+        return createCustomer.execute(this);
+    }
 }
