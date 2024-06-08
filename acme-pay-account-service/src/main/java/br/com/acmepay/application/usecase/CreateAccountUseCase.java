@@ -1,5 +1,6 @@
 package br.com.acmepay.application.usecase;
 
+import br.com.acmepay.application.domain.exception.InvalidDocumentException;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
 import br.com.acmepay.application.ports.out.ICreateAccount;
@@ -13,7 +14,8 @@ public class CreateAccountUseCase implements ICreateAccountUseCase {
     private final ICreateAccount createAccount;
 
     @Override
-    public void execute(AccountDomain domain) {
+    public void execute(AccountDomain domain) throws InvalidDocumentException {
+        domain.validateDocument(domain.getDocument());
         domain.create(createAccount);
     }
 }
