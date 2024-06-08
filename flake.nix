@@ -15,7 +15,12 @@
     {
       devShells = forAllSystems (pkgs:
         {
-          default = import ./shell.nix { inherit pkgs; };
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              maven
+              jdk17
+            ];
+          };
         });
     };
 
