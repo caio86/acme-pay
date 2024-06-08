@@ -1,2 +1,2 @@
 ALTER TABLE accounts
-  ADD COLUMN document varchar(255) not null;
+  ADD COLUMN document varchar(20) not null;
