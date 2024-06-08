@@ -1,0 +1,13 @@
+services:
+  postgres-account:
+    image: postgres
+    container_name: acme-pay-customer-service
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=customer-service
+    volumes:
+      - "./data/customer/postgres:/var/lib/postgres/data"
+    ports:
+      - "5434:5432"
