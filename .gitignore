@@ -6,4 +6,5 @@ target
 .settings/
 .env
 .direnv
+data/
 
