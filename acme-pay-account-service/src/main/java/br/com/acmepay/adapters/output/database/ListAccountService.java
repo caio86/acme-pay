@@ -1,11 +1,11 @@
-package br.com.acmepay.adapters.output;
+package br.com.acmepay.adapters.output.database;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import br.com.acmepay.adapters.output.repository.AccountRepository;
+import br.com.acmepay.adapters.output.database.repository.AccountRepository;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.out.IListAccount;
 import lombok.AllArgsConstructor;

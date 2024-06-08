@@ -54,13 +54,7 @@ public class AccountController implements IAccountResourceAPI {
                 .balance(request.getBalance())
                 .build();
 
-        try {
-            createAccountUseCase.execute(domain);
-        } catch (Exception e) {
-            return AccountCreateResponse.builder()
-                    .message("account creation failed with error: " + e.getMessage())
-                    .build();
-        }
+        createAccountUseCase.execute(domain);
 
         return AccountCreateResponse.builder()
                 .message("account created!")

@@ -1,6 +1,6 @@
 package br.com.acmepay.adapters.output;
 
-import br.com.acmepay.adapters.output.repository.CustomerRepository;
+import br.com.acmepay.adapters.output.database.repository.CustomerRepository;
 import br.com.acmepay.application.domain.models.CustomerDomain;
 import br.com.acmepay.application.ports.out.IListCustomer;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package br.com.acmepay.adapters.output.entity;
+package br.com.acmepay.adapters.output.database.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
