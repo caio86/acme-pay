@@ -17,6 +17,7 @@ public class AccountDomain {
     private Long id;
     private Integer number;
     private Integer agency;
+    private String document;
     private BigDecimal balance;
     private Boolean close;
     private LocalDateTime created_at;
@@ -26,17 +27,16 @@ public class AccountDomain {
         createAccount.execute(this);
     }
 
-    public void deposit(BigDecimal amount){
-        this.balance.add(amount);
+    public void deposit(BigDecimal amount) {
+        setBalance(this.balance.add(amount));
     }
 
     public void withdraw(BigDecimal amount) throws BalanceToWithdrawException {
-        if (this.balance.compareTo(amount) >= 0){
-            this.balance.subtract(amount);
-        }else {
+        if (this.balance.compareTo(amount) >= 0) {
+            setBalance(this.balance.subtract(amount));
+        } else {
             throw new BalanceToWithdrawException("error withdraw");
         }
-
     }
 
 }

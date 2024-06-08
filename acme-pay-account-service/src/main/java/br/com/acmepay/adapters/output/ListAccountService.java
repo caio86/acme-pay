@@ -26,6 +26,7 @@ public class ListAccountService implements IListAccount {
                         .id(item.getId())
                         .number(item.getNumber())
                         .agency(item.getAgency())
+                        .document(item.getDocument())
                         .balance(item.getBalance())
                         .close(item.getClose())
                         .created_at(item.getCreated_at())

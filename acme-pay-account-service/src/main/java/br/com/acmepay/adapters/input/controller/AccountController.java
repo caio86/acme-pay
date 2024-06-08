@@ -32,6 +32,7 @@ public class AccountController implements IAccountResourceAPI {
                         .number(item.getNumber())
                         .agency(item.getAgency())
                         .balance(item.getBalance())
+                        .document(item.getDocument())
                         .close(item.getClose())
                         .created_at(item.getCreated_at())
                         .updated_at(item.getUpdated_at())
@@ -49,6 +50,7 @@ public class AccountController implements IAccountResourceAPI {
                 .close(false)
                 .agency(request.getAgency())
                 .number(request.getNumber())
+                .document(request.getDocument())
                 .balance(request.getBalance())
                 .build();
         createAccountUseCase.execute(domain);

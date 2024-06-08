@@ -16,13 +16,14 @@ public class CreateAccountService implements ICreateAccount {
     @Override
     public void execute(AccountDomain accountDomain) {
         var account = AccountEntity.builder()
-            .agency(accountDomain.getAgency())
-            .number(accountDomain.getNumber())
-            .balance(accountDomain.getBalance())
-            .close(accountDomain.getClose())
-            .created_at(accountDomain.getCreated_at())
-            .updated_at(accountDomain.getUpdated_at())
-            .build();
+                .agency(accountDomain.getAgency())
+                .number(accountDomain.getNumber())
+                .balance(accountDomain.getBalance())
+                .document(accountDomain.getDocument())
+                .close(accountDomain.getClose())
+                .created_at(accountDomain.getCreated_at())
+                .updated_at(accountDomain.getUpdated_at())
+                .build();
 
         repository.save(account);
     }

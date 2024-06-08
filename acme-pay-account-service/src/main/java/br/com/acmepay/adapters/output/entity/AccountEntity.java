@@ -18,15 +18,13 @@ import java.time.LocalDateTime;
 public class AccountEntity {
 
     @Id
-    @SequenceGenerator(name = "account_seq",
-    sequenceName = "account_seq",
-    allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,
-    generator = "account_seq")
+    @SequenceGenerator(name = "account_seq", sequenceName = "account_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_seq")
     private Long id;
 
     private Integer number;
     private Integer agency;
+    private String document;
     private BigDecimal balance;
     private Boolean close;
     private LocalDateTime created_at;

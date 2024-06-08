@@ -12,6 +12,7 @@ public class AccountListResponse {
     private Long id;
     private Integer number;
     private Integer agency;
+    private String document;
     private BigDecimal balance;
     private Boolean close;
     private LocalDateTime created_at;
