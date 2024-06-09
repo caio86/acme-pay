@@ -19,6 +19,7 @@
             packages = with pkgs; [
               maven
               jdk17
+              just
             ];
           };
         });
