@@ -1,7 +1,11 @@
 package br.com.acmepay;
 
-public class Main {
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class NotificationApplicationService {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        SpringApplication.run(NotificationApplicationService.class, args);
     }
 }
