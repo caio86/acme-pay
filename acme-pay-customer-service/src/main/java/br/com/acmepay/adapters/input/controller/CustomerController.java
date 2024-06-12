@@ -10,7 +10,6 @@ import br.com.acmepay.application.ports.in.IListCustomerUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -25,16 +24,14 @@ public class CustomerController implements ICustomerResourceAPI {
         var domain = listCustomerUseCase.execute();
 
         var response = domain.stream()
-            .map(item -> CustomerListResponse.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .phone(item.getPhone())
-                .email(item.getEmail())
-                .document(item.getDocument())
-                .created_at(item.getCreated_at())
-                .updated_at(item.getUpdated_at())
-                .build())
-            .toList();
+                .map(item -> CustomerListResponse.builder()
+                        .id(item.getId())
+                        .name(item.getName())
+                        .phone(item.getPhone())
+                        .email(item.getEmail())
+                        .document(item.getDocument())
+                        .build())
+                .toList();
 
         return response;
     }
@@ -42,17 +39,15 @@ public class CustomerController implements ICustomerResourceAPI {
     @Override
     public CustomerCreateResponse create(CustomerCreateRequest request) {
         var domain = CustomerDomain.builder()
-            .created_at(LocalDateTime.now())
-            .updated_at(null)
-            .name(request.getName())
-            .email(request.getEmail())
-            .phone(request.getPhone())
-            .document(request.getDocument())
-            .build();
+                .name(request.getName())
+                .email(request.getEmail())
+                .phone(request.getPhone())
+                .document(request.getDocument())
+                .build();
 
         createCustomerUseCase.execute(domain);
         return CustomerCreateResponse.builder()
-            .message("Customer created!")
-            .build();
+                .message("Customer created!")
+                .build();
     }
 }

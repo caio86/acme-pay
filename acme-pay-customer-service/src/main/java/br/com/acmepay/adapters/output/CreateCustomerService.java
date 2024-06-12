@@ -1,11 +1,12 @@
 package br.com.acmepay.adapters.output;
 
+import org.springframework.stereotype.Service;
+
 import br.com.acmepay.adapters.output.database.entity.CustomerEntity;
 import br.com.acmepay.adapters.output.database.repository.CustomerRepository;
 import br.com.acmepay.application.domain.models.CustomerDomain;
 import br.com.acmepay.application.ports.out.ICreateCustomer;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Service;
 
 @AllArgsConstructor
 @Service
@@ -16,13 +17,11 @@ public class CreateCustomerService implements ICreateCustomer {
     @Override
     public String execute(CustomerDomain customerDomain) {
         var customer = CustomerEntity.builder()
-            .name(customerDomain.getName())
-            .phone(customerDomain.getPhone())
-            .email(customerDomain.getEmail())
-            .document(customerDomain.getDocument())
-            .created_at(customerDomain.getCreated_at())
-            .updated_at(customerDomain.getUpdated_at())
-            .build();
+                .name(customerDomain.getName())
+                .phone(customerDomain.getPhone())
+                .email(customerDomain.getEmail())
+                .document(customerDomain.getDocument())
+                .build();
 
         repository.save(customer);
 
