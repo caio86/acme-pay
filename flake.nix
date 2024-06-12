@@ -20,6 +20,7 @@
               maven
               jdk17
               just
+              parallel
             ];
           };
         });

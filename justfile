@@ -36,6 +36,12 @@ start-customer-bg:
 stop-bg-services service-name:
   jps | grep {{service-name}} | awk '{print $1}' | xargs kill -TERM
 
+stop-all-docker:
+  parallel docker compose -f {} down ::: acme-pay-*-service/docker-compose.yml
+
+clean-docker: stop-all-docker
+  git clean -fx */data
+
 start-service := '
   export $(grep -v "^#" .env | xargs)
   docker compose up -d
