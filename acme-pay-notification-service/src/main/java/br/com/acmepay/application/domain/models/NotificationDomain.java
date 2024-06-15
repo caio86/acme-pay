@@ -1,12 +1,12 @@
 package br.com.acmepay.application.domain.models;
 
+import java.time.LocalDateTime;
+
+import br.com.acmepay.application.ports.out.ICreateDocument;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -14,11 +14,18 @@ import java.time.LocalDateTime;
 @Builder
 public class NotificationDomain {
 
+    public enum Statuses {
+        ACTIVE,
+        SUSPENDED
+    }
+
     private Long id;
-    private LocalDateTime data_transaction;
-    private Integer source_account;
-    private Integer destination_account;
-    private BigDecimal amount;
+    private String document;
+    private Statuses status;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
+
+    public void create(ICreateDocument createDocument) {
+        createDocument.execute(this);
+    };
 }
