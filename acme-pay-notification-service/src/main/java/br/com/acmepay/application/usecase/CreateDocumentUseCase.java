@@ -14,6 +14,6 @@ public class CreateDocumentUseCase implements ICreateDocumentUseCase {
 
     @Override
     public void execute(NotificationDomain request) {
-        createDocument.execute(request);
+        request.create(createDocument);
     }
 }
