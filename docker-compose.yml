@@ -1,6 +1,7 @@
 services:
   rabbitmq:
     image: rabbitmq:3-management-alpine
+    hostname: "rabbitmq-acme-pay"
     container_name: "rabbitmq-acme-pay"
     ports:
       - "5672:5672"
