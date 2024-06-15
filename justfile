@@ -4,6 +4,9 @@ alias sab := start-account-bg
 alias sc := start-customer
 alias scb := start-customer-bg
 
+alias sn := start-notification
+alias snb := start-notification-bg
+
 
 list:
   just -l
@@ -32,6 +35,18 @@ start-customer-bg:
   cd ./acme-pay-customer-service
   {{start-service-bg}}
 
+# Start docker container and notification service
+start-notification:
+  #!/usr/bin/env bash
+  cd ./acme-pay-notification-service
+  {{start-service}}
+
+# Start docker container and notification service as a bg job
+start-notification-bg:
+  #!/usr/bin/env bash
+  cd ./acme-pay-notification-service
+  {{start-service-bg}}
+
 # Stop background services by name
 stop-bg-services service-name:
   jps | grep {{service-name}} | awk '{print $1}' | xargs kill -TERM
@@ -40,7 +55,7 @@ stop-all-docker:
   parallel docker compose -f {} down ::: acme-pay-*-service/docker-compose.yml
 
 clean-docker: stop-all-docker
-  git clean -fx */data
+  sudo git clean -fx */data
 
 start-service := '
   export $(grep -v "^#" .env | xargs)
