@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.acmepay.adapters.input.api.IAccountResourceAPI;
@@ -23,7 +25,7 @@ public class AccountController implements IAccountResourceAPI {
     private final IListAccountsUseCase listAccountsUseCase;
 
     @Override
-    public List<AccountListResponse> list() {
+    public ResponseEntity<List<AccountListResponse>> list() {
         var domain = listAccountsUseCase.execute();
 
         var response = domain.stream()
@@ -39,11 +41,11 @@ public class AccountController implements IAccountResourceAPI {
                         .build())
                 .collect(Collectors.toList());
 
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
-    public AccountCreateResponse create(AccountCreateRequest request) {
+    public ResponseEntity<AccountCreateResponse> create(AccountCreateRequest request) {
         var domain = AccountDomain.builder()
                 .created_at(LocalDateTime.now())
                 .updated_at(null)
@@ -56,8 +58,10 @@ public class AccountController implements IAccountResourceAPI {
 
         createAccountUseCase.execute(domain);
 
-        return AccountCreateResponse.builder()
-                .message("account created!")
+        var response = AccountCreateResponse.builder()
+                .message("account creation in progress")
                 .build();
+
+        return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
     }
 }
