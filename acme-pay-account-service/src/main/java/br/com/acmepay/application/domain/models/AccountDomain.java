@@ -1,14 +1,19 @@
 package br.com.acmepay.application.domain.models;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 import br.com.acmepay.application.domain.exception.InvalidDocumentException;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
-import br.com.acmepay.application.ports.out.ICreateAccount;
-import lombok.*;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -16,6 +21,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDomain {
+
+    private static final ConcurrentHashMap<String, AccountDomain> cache = new ConcurrentHashMap<>();
 
     private Long id;
     private Integer number;
@@ -26,17 +33,18 @@ public class AccountDomain {
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 
-    public void create(ICreateAccount createAccount, ICheckCustomerDocument checkCustomerDocument) {
+    public void create(ICheckCustomerDocument checkCustomerDocument) {
+        String validationID = UUID.randomUUID().toString();
+        cache.put(validationID, this);
 
         // recuperar o documento
         var doc = DocumentRequest.builder()
                 .document(this.getDocument())
+                .validationID(validationID)
                 .build();
 
         // enviar para verificação
         checkCustomerDocument.execute(doc);
-
-        createAccount.execute(this);
     }
 
     public void deposit(BigDecimal amount) {
@@ -55,6 +63,10 @@ public class AccountDomain {
         if (document.length() != 11) {
             throw new InvalidDocumentException("CPF Inválido");
         }
+    }
+
+    public AccountDomain getAccountFromCache(String validationID) {
+        return cache.remove(validationID);
     }
 
 }

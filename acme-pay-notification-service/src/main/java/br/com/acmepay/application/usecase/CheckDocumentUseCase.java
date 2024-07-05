@@ -1,5 +1,6 @@
 package br.com.acmepay.application.usecase;
 
+import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.models.NotificationDomain;
 import br.com.acmepay.application.ports.in.ICheckDocumentUseCase;
 import br.com.acmepay.application.ports.out.ICheckDocumentFail;
@@ -17,9 +18,9 @@ public class CheckDocumentUseCase implements ICheckDocumentUseCase {
     private final ICheckDocumentSucess checkDocumentSucess;
 
     @Override
-    public void execute(String document) {
+    public void execute(DocumentRequest documentRequest) {
         var domain = NotificationDomain.builder().build();
-        domain.checkDocumentStatus(findDocument, document, checkDocumentSucess, checkDocumentFail);
+        domain.checkDocumentStatus(findDocument, documentRequest, checkDocumentSucess, checkDocumentFail);
     }
 
 }

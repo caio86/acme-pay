@@ -2,6 +2,7 @@ package br.com.acmepay.application.domain.models;
 
 import java.time.LocalDateTime;
 
+import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.ports.out.ICheckDocumentFail;
 import br.com.acmepay.application.ports.out.ICheckDocumentSucess;
 import br.com.acmepay.application.ports.out.ICreateDocument;
@@ -36,23 +37,24 @@ public class NotificationDomain {
 
     public void checkDocumentStatus(
             IFindDocument findDocument,
-            String document,
+            DocumentRequest documentRequest,
             ICheckDocumentSucess checkDocumentSucess,
             ICheckDocumentFail checkDocumentFail) {
 
-        var foundDocument = findDocument.execute(document);
+        var foundDocument = findDocument.execute(documentRequest.getDocument());
         if (foundDocument == null) {
             log.info("Documento não foi criado");
+            checkDocumentFail.execute(documentRequest);
             return;
         }
 
         var status = foundDocument.getStatus();
         if (status == Statuses.ACTIVE) {
-            log.info("--- Documento Ativo: {} ---", foundDocument.getDocument());
-            checkDocumentSucess.execute(foundDocument.getDocument());
+            log.info("--- Documento Ativo: {} ---", documentRequest.getDocument());
+            checkDocumentSucess.execute(documentRequest);
         } else {
-            log.info("--- Documento Suspenso: {} ---", foundDocument.getDocument());
-            checkDocumentFail.execute(foundDocument.getDocument());
+            log.info("--- Documento Suspenso: {} ---", documentRequest.getDocument());
+            checkDocumentFail.execute(documentRequest);
         }
     };
 }

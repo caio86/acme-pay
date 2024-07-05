@@ -1,5 +1,5 @@
 package br.com.acmepay.adapters.output.queue;
 
-public interface MessageProducer {
-    void pubish(String queue, String payload);
+public interface MessageProducer<T> {
+    void pubish(String queue, T payload);
 }

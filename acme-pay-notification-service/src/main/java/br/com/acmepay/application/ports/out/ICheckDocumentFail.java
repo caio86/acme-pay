@@ -1,5 +1,7 @@
 package br.com.acmepay.application.ports.out;
 
+import br.com.acmepay.adapters.request.DocumentRequest;
+
 public interface ICheckDocumentFail {
-    void execute(String message);
+    void execute(DocumentRequest message);
 }
