@@ -7,7 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
-import br.com.acmepay.application.domain.exception.InvalidDocumentException;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,12 +55,6 @@ public class AccountDomain {
             setBalance(this.balance.subtract(amount));
         } else {
             throw new BalanceToWithdrawException("error withdraw");
-        }
-    }
-
-    public void validateDocument(String document) throws InvalidDocumentException {
-        if (document.length() != 11) {
-            throw new InvalidDocumentException("CPF Inválido");
         }
     }
 
