@@ -9,15 +9,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.acmepay.adapters.input.api.request.AccountCreateRequest;
+import br.com.acmepay.adapters.input.api.request.AccountTransactionRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
 import br.com.acmepay.adapters.input.api.response.AccountListResponse;
+import br.com.acmepay.adapters.input.api.response.AccountTransactionResponse;
 
 @RequestMapping("/api/v1/accounts")
 public interface IAccountResourceAPI {
 
-    @GetMapping
+    @GetMapping("/list")
     ResponseEntity<List<AccountListResponse>> list();
 
-    @PostMapping
+    @PostMapping("/create")
     ResponseEntity<AccountCreateResponse> create(@RequestBody AccountCreateRequest request);
+
+    @PostMapping("/transaction")
+    ResponseEntity<AccountTransactionResponse> transaction(@RequestBody AccountTransactionRequest body);
 }

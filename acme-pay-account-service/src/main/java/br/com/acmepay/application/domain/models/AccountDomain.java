@@ -6,17 +6,23 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 import br.com.acmepay.adapters.request.DocumentRequest;
+import br.com.acmepay.adapters.request.TransactionRequest;
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
+import br.com.acmepay.application.ports.out.IFindAccountByNumber;
+import br.com.acmepay.application.ports.out.IMakeTransaction;
+import br.com.acmepay.application.utils.FormatDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class AccountDomain {
@@ -61,5 +67,43 @@ public class AccountDomain {
     public AccountDomain getAccountFromCache(String validationID) {
         return cache.remove(validationID);
     }
+
+    public TransactionReturn transaction(
+            Integer sourceAccountNumber,
+            Integer destinationAccountNumber,
+            BigDecimal amount,
+            IMakeTransaction makeTransaction,
+            IFindAccountByNumber findAccountByNumber) {
+
+        AccountDomain sourceAccount;
+        AccountDomain destinationAccount;
+
+        try {
+            sourceAccount = findAccountByNumber.execute(sourceAccountNumber);
+            destinationAccount = findAccountByNumber.execute(destinationAccountNumber);
+
+            sourceAccount.withdraw(amount);
+            destinationAccount.deposit(amount);
+        } catch (Exception e) {
+            return TransactionReturn.builder()
+                    .status(false)
+                    .message("Transaction error: " + e.getMessage())
+                    .build();
+        }
+
+        var transaction = TransactionRequest.builder()
+                .sourceAccount(sourceAccount.getNumber().toString())
+                .destinationAccount(destinationAccount.getNumber().toString())
+                .dateTransaction(FormatDate.formatedDate())
+                .amount(amount)
+                .build();
+
+        makeTransaction.execute(transaction);
+
+        return TransactionReturn.builder()
+                .status(true)
+                .message("Transação concluida")
+                .build();
+    };
 
 }
