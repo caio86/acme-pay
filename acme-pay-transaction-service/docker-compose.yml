@@ -1,0 +1,13 @@
+services:
+  postgres-transaction:
+    image: postgres
+    container_name: acme-pay-transaction-service
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_DB=${DB_DATABASE}
+    volumes:
+      - "./data/transactions/postgres:/var/lib/postgres/data"
+    ports:
+      - "${DB_PORT}:5432"
