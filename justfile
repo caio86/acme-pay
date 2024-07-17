@@ -7,6 +7,8 @@ alias scb := start-customer-bg
 alias sn := start-notification
 alias snb := start-notification-bg
 
+alias st := start-transaction
+alias stb := start-transaction-bg
 
 list:
   just -l
@@ -45,6 +47,18 @@ start-notification:
 start-notification-bg:
   #!/usr/bin/env bash
   cd ./acme-pay-notification-service
+  {{start-service-bg}}
+
+# Start docker container and transaction service
+start-transaction:
+  #!/usr/bin/env bash
+  cd ./acme-pay-transaction-service
+  {{start-service}}
+
+# Start docker container and transaction service as a bg job
+start-transaction-bg:
+  #!/usr/bin/env bash
+  cd ./acme-pay-transaction-service
   {{start-service-bg}}
 
 # Stop background services by name
