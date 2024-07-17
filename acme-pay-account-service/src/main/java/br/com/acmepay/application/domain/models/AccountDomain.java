@@ -11,7 +11,6 @@ import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
 import br.com.acmepay.application.ports.out.IFindAccountByNumber;
 import br.com.acmepay.application.ports.out.IMakeTransaction;
-import br.com.acmepay.application.utils.FormatDate;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -92,9 +91,9 @@ public class AccountDomain {
         }
 
         var transaction = TransactionRequest.builder()
-                .sourceAccount(sourceAccount.getNumber().toString())
-                .destinationAccount(destinationAccount.getNumber().toString())
-                .dateTransaction(FormatDate.formatedDate())
+                .sourceAccount(sourceAccount.getNumber())
+                .destinationAccount(destinationAccount.getNumber())
+                .dateTransaction(LocalDateTime.now())
                 .amount(amount)
                 .build();
 
