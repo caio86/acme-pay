@@ -7,18 +7,17 @@ import br.com.acmepay.application.domain.models.TransactionReturn;
 import br.com.acmepay.application.ports.in.IMakeTransactionUseCase;
 import br.com.acmepay.application.ports.out.IFindAccountByNumber;
 import br.com.acmepay.application.ports.out.IMakeTransaction;
+import br.com.acmepay.application.ports.out.IUpdateAccount;
 import br.com.acmepay.application.utils.UseCase;
 import lombok.AllArgsConstructor;
 
-/**
- * MakeTransactionUseCase
- */
 @UseCase
 @AllArgsConstructor
 public class MakeTransactionUseCase implements IMakeTransactionUseCase {
 
     private final IMakeTransaction makeTransaction;
     private final IFindAccountByNumber findAccountByNumber;
+    private final IUpdateAccount updateAccount;
 
     public TransactionReturn execute(
             Integer sourceAccountNumber,
@@ -28,6 +27,6 @@ public class MakeTransactionUseCase implements IMakeTransactionUseCase {
         var domain = AccountDomain.builder().build();
 
         return domain.transaction(sourceAccountNumber, destinationAccountNumber, amount, makeTransaction,
-                findAccountByNumber);
+                findAccountByNumber, updateAccount);
     }
 }

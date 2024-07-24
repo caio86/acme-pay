@@ -11,6 +11,7 @@ import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
 import br.com.acmepay.application.ports.out.IFindAccountByNumber;
 import br.com.acmepay.application.ports.out.IMakeTransaction;
+import br.com.acmepay.application.ports.out.IUpdateAccount;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -72,7 +73,8 @@ public class AccountDomain {
             Integer destinationAccountNumber,
             BigDecimal amount,
             IMakeTransaction makeTransaction,
-            IFindAccountByNumber findAccountByNumber) {
+            IFindAccountByNumber findAccountByNumber,
+            IUpdateAccount updateAccount) {
 
         AccountDomain sourceAccount;
         AccountDomain destinationAccount;
@@ -83,6 +85,9 @@ public class AccountDomain {
 
             sourceAccount.withdraw(amount);
             destinationAccount.deposit(amount);
+
+            updateAccount.execute(sourceAccount);
+            updateAccount.execute(destinationAccount);
         } catch (Exception e) {
             return TransactionReturn.builder()
                     .status(false)
