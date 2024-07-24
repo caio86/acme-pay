@@ -8,6 +8,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import br.com.acmepay.adapters.request.DocumentRequest;
 import br.com.acmepay.adapters.request.TransactionRequest;
 import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
+import br.com.acmepay.application.domain.exception.InvalidTransactionRequest;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
 import br.com.acmepay.application.ports.out.IFindAccountByNumber;
 import br.com.acmepay.application.ports.out.IMakeTransaction;
@@ -60,7 +61,7 @@ public class AccountDomain {
         if (this.balance.compareTo(amount) >= 0) {
             setBalance(this.balance.subtract(amount));
         } else {
-            throw new BalanceToWithdrawException("error withdraw");
+            throw new BalanceToWithdrawException("Cannot withdraw more than the account balance");
         }
     }
 
@@ -80,6 +81,14 @@ public class AccountDomain {
         AccountDomain destinationAccount;
 
         try {
+            if (sourceAccountNumber == destinationAccountNumber) {
+                throw new InvalidTransactionRequest("Cannot make a transaction to the same account");
+            }
+
+            if (amount.compareTo(BigDecimal.ZERO) < 0) {
+                throw new InvalidTransactionRequest("Cannot make a negative transaction");
+            }
+
             sourceAccount = findAccountByNumber.execute(sourceAccountNumber);
             destinationAccount = findAccountByNumber.execute(destinationAccountNumber);
 
