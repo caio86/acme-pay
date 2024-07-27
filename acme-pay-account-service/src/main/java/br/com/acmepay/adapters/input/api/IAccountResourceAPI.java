@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.acmepay.adapters.input.api.request.AccountCreateRequest;
 import br.com.acmepay.adapters.input.api.request.AccountTransactionRequest;
+import br.com.acmepay.adapters.input.api.request.CardCreateRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
 import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 import br.com.acmepay.adapters.input.api.response.AccountTransactionResponse;
+import br.com.acmepay.adapters.input.api.response.CardCreateResponse;
 
 @RequestMapping("/api/v1/accounts")
 public interface IAccountResourceAPI {
@@ -25,4 +27,7 @@ public interface IAccountResourceAPI {
 
     @PostMapping("/transaction")
     ResponseEntity<AccountTransactionResponse> transaction(@RequestBody AccountTransactionRequest body);
+
+    @GetMapping("/cards")
+    ResponseEntity<CardCreateResponse> createCard(@RequestBody CardCreateRequest request);
 }
