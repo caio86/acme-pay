@@ -1,4 +1,4 @@
-package br.com.acmepay.adapters.output;
+package br.com.acmepay.adapters.output.database;
 
 import org.springframework.stereotype.Service;
 
