@@ -21,6 +21,7 @@ public class CreateCustomerService implements ICreateCustomer {
                 .phone(customerDomain.getPhone())
                 .email(customerDomain.getEmail())
                 .document(customerDomain.getDocument())
+                .salary(customerDomain.getSalary())
                 .build();
 
         repository.save(customer);

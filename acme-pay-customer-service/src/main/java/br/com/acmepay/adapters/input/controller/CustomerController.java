@@ -30,6 +30,7 @@ public class CustomerController implements ICustomerResourceAPI {
                         .phone(item.getPhone())
                         .email(item.getEmail())
                         .document(item.getDocument())
+                        .salary(item.getSalary())
                         .build())
                 .toList();
 
@@ -43,6 +44,7 @@ public class CustomerController implements ICustomerResourceAPI {
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .document(request.getDocument())
+                .salary(request.getSalary())
                 .build();
 
         createCustomerUseCase.execute(domain);

@@ -26,6 +26,7 @@ public class ListCustomerService implements IListCustomer {
                         .phone(item.getPhone())
                         .email(item.getEmail())
                         .document(item.getDocument())
+                        .salary(item.getSalary())
                         .build())
                 .toList();
 

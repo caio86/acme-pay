@@ -1,5 +1,7 @@
 package br.com.acmepay.application.domain.models;
 
+import java.math.BigDecimal;
+
 import br.com.acmepay.application.ports.out.ICreateCustomer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +18,7 @@ public class CustomerDomain {
     private String email;
     private String phone;
     private String document;
+    private BigDecimal salary;
 
     public String create(ICreateCustomer createCustomer) {
         return createCustomer.execute(this);

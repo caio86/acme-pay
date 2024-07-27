@@ -1,5 +1,7 @@
 package br.com.acmepay.adapters.output.database.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,4 +25,5 @@ public class CustomerEntity {
     private String email;
     private String phone;
     private String document;
+    private BigDecimal salary;
 }

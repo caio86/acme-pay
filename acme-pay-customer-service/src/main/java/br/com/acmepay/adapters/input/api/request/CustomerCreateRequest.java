@@ -1,5 +1,7 @@
 package br.com.acmepay.adapters.input.api.request;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,4 +17,5 @@ public class CustomerCreateRequest {
     private String email;
     private String phone;
     private String document;
+    private BigDecimal salary;
 }
