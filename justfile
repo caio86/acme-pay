@@ -61,6 +61,12 @@ start-transaction-bg:
   cd ./acme-pay-transaction-service
   {{start-service-bg}}
 
+start-all-services:
+  just sab
+  just scb
+  just snb
+  just stb
+
 # Stop background services by name
 stop-bg-services service-name:
   jps | grep {{service-name}} | awk '{print $1}' | xargs kill -TERM
