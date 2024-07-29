@@ -10,6 +10,9 @@ alias snb := start-notification-bg
 alias st := start-transaction
 alias stb := start-transaction-bg
 
+alias sg := start-gateway
+alias sgb := start-gateway-bg
+
 list:
   just -l
 
@@ -61,11 +64,24 @@ start-transaction-bg:
   cd ./acme-pay-transaction-service
   {{start-service-bg}}
 
+# Start docker container and gateway service
+start-gateway:
+  #!/usr/bin/env bash
+  cd ./acme-pay-gateway-service
+  mvn spring-boot:run
+
+# Start docker container and gateway service as a bg job
+start-gateway-bg:
+  #!/usr/bin/env bash
+  cd ./acme-pay-gateway-service
+  mvn spring-boot:run >> service.log  2>&1 &
+
 start-all-services:
   just sab
   just scb
   just snb
   just stb
+  just sgb
 
 # Stop background services by name
 stop-bg-services service-name:
