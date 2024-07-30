@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.acmepay.adapters.input.api.IAccountResourceAPI;
 import br.com.acmepay.adapters.input.api.request.AccountCreateRequest;
 import br.com.acmepay.adapters.input.api.request.AccountTransactionRequest;
-import br.com.acmepay.adapters.input.api.request.CardCreateRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
 import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 import br.com.acmepay.adapters.input.api.response.AccountTransactionResponse;
@@ -96,11 +95,11 @@ public class AccountController implements IAccountResourceAPI {
     }
 
     @Override
-    public ResponseEntity<CardCreateResponse> createCard(CardCreateRequest request) {
-        var result = createCardUseCase.execute(request.getDocument());
+    public ResponseEntity<CardCreateResponse> createCard(String document) {
+        var result = createCardUseCase.execute(document);
 
         var response = CardCreateResponse.builder()
-                .document(request.getDocument())
+                .document(document)
                 .salary(result.getSalary())
                 .limit(result.getLimit())
                 .build();
