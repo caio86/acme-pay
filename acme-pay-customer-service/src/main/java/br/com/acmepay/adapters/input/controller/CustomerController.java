@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.acmepay.adapters.input.api.ICustomerResourceAPI;
 import br.com.acmepay.adapters.input.api.request.CustomerCreateRequest;
-import br.com.acmepay.adapters.input.api.request.CustomerGetSalaryRequest;
 import br.com.acmepay.adapters.input.api.response.CustomerCreateResponse;
 import br.com.acmepay.adapters.input.api.response.CustomerListResponse;
 import br.com.acmepay.application.domain.models.CustomerDomain;
@@ -60,8 +59,8 @@ public class CustomerController implements ICustomerResourceAPI {
     }
 
     @Override
-    public ResponseEntity<Object> getSalary(CustomerGetSalaryRequest request) {
-        var result = getCustomerSalaryUseCase.execute(request.getDocument());
+    public ResponseEntity<Object> getSalary(String document) {
+        var result = getCustomerSalaryUseCase.execute(document);
 
         if (!result.getStatus()) {
             return new ResponseEntity<>(result.getErrorMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
