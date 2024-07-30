@@ -6,7 +6,7 @@
 
   <groupId>br.com.acmepay</groupId>
   <artifactId>acme-pay</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <packaging>pom</packaging>
 
   <name>acme-pay</name>
@@ -17,6 +17,7 @@
     <module>acme-pay-customer-service</module>
     <module>acme-pay-transaction-service</module>
     <module>acme-pay-notification-service</module>
+    <module>acme-pay-gateway-service</module>
   </modules>
 
   <properties>
@@ -50,11 +51,6 @@
   </dependencyManagement>
 
   <dependencies>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
 
     <!-- lombok -->
     <dependency>

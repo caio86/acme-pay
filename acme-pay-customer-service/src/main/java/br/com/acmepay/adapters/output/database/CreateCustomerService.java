@@ -1,4 +1,4 @@
-package br.com.acmepay.adapters.output;
+package br.com.acmepay.adapters.output.database;
 
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,7 @@ public class CreateCustomerService implements ICreateCustomer {
                 .phone(customerDomain.getPhone())
                 .email(customerDomain.getEmail())
                 .document(customerDomain.getDocument())
+                .salary(customerDomain.getSalary())
                 .build();
 
         repository.save(customer);

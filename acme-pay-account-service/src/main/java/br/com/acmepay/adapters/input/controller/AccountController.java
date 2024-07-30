@@ -14,8 +14,10 @@ import br.com.acmepay.adapters.input.api.request.AccountTransactionRequest;
 import br.com.acmepay.adapters.input.api.response.AccountCreateResponse;
 import br.com.acmepay.adapters.input.api.response.AccountListResponse;
 import br.com.acmepay.adapters.input.api.response.AccountTransactionResponse;
+import br.com.acmepay.adapters.input.api.response.CardCreateResponse;
 import br.com.acmepay.application.domain.models.AccountDomain;
 import br.com.acmepay.application.ports.in.ICreateAccountUseCase;
+import br.com.acmepay.application.ports.in.ICreateCardUseCase;
 import br.com.acmepay.application.ports.in.IListAccountsUseCase;
 import br.com.acmepay.application.ports.in.IMakeTransactionUseCase;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ public class AccountController implements IAccountResourceAPI {
     private final ICreateAccountUseCase createAccountUseCase;
     private final IListAccountsUseCase listAccountsUseCase;
     private final IMakeTransactionUseCase makeTransactionUseCase;
+    private final ICreateCardUseCase createCardUseCase;
 
     @Override
     public ResponseEntity<List<AccountListResponse>> list() {
@@ -86,6 +89,19 @@ public class AccountController implements IAccountResourceAPI {
 
         var response = AccountTransactionResponse.builder()
                 .message(res.getMessage())
+                .build();
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<CardCreateResponse> createCard(String document) {
+        var result = createCardUseCase.execute(document);
+
+        var response = CardCreateResponse.builder()
+                .document(document)
+                .salary(result.getSalary())
+                .limit(result.getLimit())
                 .build();
 
         return new ResponseEntity<>(response, HttpStatus.OK);

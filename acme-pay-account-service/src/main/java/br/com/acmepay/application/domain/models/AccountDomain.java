@@ -11,8 +11,10 @@ import br.com.acmepay.application.domain.exception.BalanceToWithdrawException;
 import br.com.acmepay.application.domain.exception.InvalidTransactionRequest;
 import br.com.acmepay.application.ports.out.ICheckCustomerDocument;
 import br.com.acmepay.application.ports.out.IFindAccountByNumber;
+import br.com.acmepay.application.ports.out.IGetCustomerSalary;
 import br.com.acmepay.application.ports.out.IMakeTransaction;
 import br.com.acmepay.application.ports.out.IUpdateAccount;
+import br.com.acmepay.application.usecase.response.CreateCardUseCaseResponse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -118,5 +120,26 @@ public class AccountDomain {
                 .message("Transação concluida")
                 .build();
     };
+
+    public CreateCardUseCaseResponse createCard(String document, IGetCustomerSalary getCustomerSalary) {
+        var salary = getCustomerSalary.execute(document);
+
+        BigDecimal multiplier;
+
+        if (salary.compareTo(BigDecimal.valueOf(10000)) == -1) {
+            multiplier = CardLimitConstants.M1;
+        } else if (salary.compareTo(BigDecimal.valueOf(15000)) == -1) {
+            multiplier = CardLimitConstants.M2;
+        } else {
+            multiplier = CardLimitConstants.M3;
+        }
+
+        var limit = salary.multiply(multiplier);
+
+        return CreateCardUseCaseResponse.builder()
+                .limit(limit)
+                .salary(salary)
+                .build();
+    }
 
 }

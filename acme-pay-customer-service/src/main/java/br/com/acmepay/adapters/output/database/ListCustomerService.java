@@ -1,4 +1,4 @@
-package br.com.acmepay.adapters.output;
+package br.com.acmepay.adapters.output.database;
 
 import java.util.List;
 
@@ -26,6 +26,7 @@ public class ListCustomerService implements IListCustomer {
                         .phone(item.getPhone())
                         .email(item.getEmail())
                         .document(item.getDocument())
+                        .salary(item.getSalary())
                         .build())
                 .toList();
 
