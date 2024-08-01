@@ -21,6 +21,12 @@ services:
       - "2181:2181"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+    healthcheck:
+      test: nc -z localhost 2181 | exit -1
+      interval: 5s
+      retries: 10
+      start_period: 10s
+      timeout: 5s
 
   kafka:
     container_name: kafka
