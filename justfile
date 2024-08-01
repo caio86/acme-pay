@@ -16,6 +16,9 @@ alias sgb := start-gateway-bg
 list:
   just -l
 
+test:
+  mvn test
+
 # Start docker container and account service
 start-account:
   #!/usr/bin/env bash
