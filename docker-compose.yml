@@ -9,14 +9,10 @@ services:
     volumes:
       - "./data/rabbitmq/data/:/var/lib/rabbitmq"
       - "./data/rabbitmq/log/:/var/log/rabbitmq"
-    networks:
-      - "rabbitmq"
 
   zookeeper:
     container_name: zookeeper
     image: bitnami/zookeeper:latest
-    networks: 
-      - kafka-net
     ports:
       - "2181:2181"
     environment:
@@ -31,8 +27,6 @@ services:
   kafka:
     container_name: kafka
     image: bitnami/kafka:latest
-    networks:
-      - kafka-net
     ports:
       - "9092:9092"
     environment:
@@ -46,6 +40,6 @@ services:
       - zookeeper
 
 networks:
-  kafka-net:
-  rabbitmq:
-    driver: bridge
+  default:
+    external: true
+    name: acme-pay
