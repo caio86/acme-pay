@@ -1,7 +1,26 @@
 services:
-  postgres-account:
-    image: postgres
-    container_name: acme-pay-account-service
+
+  account-service:
+    container_name: account-service
+    image: acme-pay-account-service:v1.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - account-service
+      - acme-pay
+    environment:
+      DB_HOST: account-service-db
+    ports:
+      - "8081:8080"
+    depends_on:
+      - account-db
+
+  account-db:
+    image: postgres:16
+    container_name: account-service-db
+    networks:
+      - account-service
     restart: always
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -11,3 +30,8 @@ services:
       - "./data/accounts/postgres:/var/lib/postgres/data"
     ports:
       - "${DB_PORT}:5432"
+
+networks:
+  account-service:
+  acme-pay:
+    external: true
