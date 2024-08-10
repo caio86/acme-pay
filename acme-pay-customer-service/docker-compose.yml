@@ -1,7 +1,26 @@
 services:
-  postgres-customer:
-    image: postgres
-    container_name: acme-pay-customer-service
+
+  customer-service:
+    container_name: customer-service
+    image: acme-pay-customer-service:v1.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - customer-service
+      - acme-pay
+    environment:
+      DB_HOST: customer-service-db
+    ports:
+      - "${SERVER_PORT}:8080"
+    depends_on:
+      - customer-db
+
+  customer-db:
+    image: postgres:16
+    container_name: customer-service-db
+    networks:
+      - customer-service
     restart: always
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -11,3 +30,8 @@ services:
       - "./data/customer/postgres:/var/lib/postgres/data"
     ports:
       - "${DB_PORT}:5432"
+
+networks:
+  customer-service:
+  acme-pay:
+    external: true
