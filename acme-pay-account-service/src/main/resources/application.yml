@@ -1,12 +1,12 @@
 server:
-  port: ${SERVER_PORT:-8081}
+  port: ${SERVER_PORT:8080}
 
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: ${DB_PASSWORD:-postgres}
-    username: ${DB_USER:-postgres}
-    url: jdbc:postgresql://${DB_HOST:-localhost}:${DB_PORT:-5433}/${DB_DATABASE:-account-service}
+    password: ${DB_PASSWORD:postgres}
+    username: ${DB_USER:postgres}
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5433}/${DB_DATABASE:account-service}
   jpa:
     properties:
       hibernate:
@@ -14,3 +14,7 @@ spring:
       show-sql: true
   flyway:
     baseline-on-migrate: true
+  rabbitmq:
+    addresses: ${RABBITMQ_HOST:localhost}:${RABBITMQ_PORT:5672}
+  kafka:
+    bootstrap-servers: ${KAFKA_BROKER}
