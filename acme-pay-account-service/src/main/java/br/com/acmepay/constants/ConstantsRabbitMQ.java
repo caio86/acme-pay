@@ -1,6 +1,6 @@
 package br.com.acmepay.constants;
 
-public class ConstantsRabbitMQ {
+public interface ConstantsRabbitMQ {
 
     String EXCHANGE_CHECK_DOCUMENT = "check_document_queue_exchange";
     String EXCHANGE_CHECK_DOCUMENT_SUCCESS = "check_document_queue_exchange_success";
