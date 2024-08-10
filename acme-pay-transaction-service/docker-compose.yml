@@ -1,7 +1,26 @@
 services:
-  postgres-transaction:
-    image: postgres
-    container_name: acme-pay-transaction-service
+
+  transaction-service:
+    container_name: transaction-service
+    image: acme-pay-transaction-service:v1.0
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - transaction-service
+      - acme-pay
+    environment:
+      DB_HOST: transaction-service-db
+    ports:
+      - "${SERVER_PORT}:8080"
+    depends_on:
+      - transaction-db
+
+  transaction-db:
+    image: postgres:16
+    container_name: transaction-service-db
+    networks:
+      - transaction-service
     restart: always
     environment:
       - POSTGRES_PASSWORD=${DB_PASSWORD}
@@ -11,3 +30,9 @@ services:
       - "./data/transactions/postgres:/var/lib/postgres/data"
     ports:
       - "${DB_PORT}:5432"
+
+networks:
+  transaction-service:
+  acme-pay:
+    external: true
+
