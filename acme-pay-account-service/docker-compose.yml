@@ -12,7 +12,7 @@ services:
     environment:
       DB_HOST: account-service-db
     ports:
-      - "8081:8080"
+      - "${SERVER_PORT}:8080"
     depends_on:
       - account-db
 

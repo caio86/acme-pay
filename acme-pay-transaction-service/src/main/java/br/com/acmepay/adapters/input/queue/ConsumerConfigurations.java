@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -19,11 +20,14 @@ import org.springframework.kafka.support.serializer.JsonDeserializer;
 @Configuration
 public class ConsumerConfigurations {
 
+    @Value("${spring.kafka.bootstrap-servers}")
+    private String kafkaServer;
+
     @Bean
     public Map<String, Object> consumerConfigs() {
         Map<String, Object> configs = new java.util.HashMap<>();
 
-        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        configs.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         configs.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         configs.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, JsonDeserializer.class);
         configs.put(JsonDeserializer.TRUSTED_PACKAGES, "br.com.acmepay.adapters.request");
