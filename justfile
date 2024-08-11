@@ -4,6 +4,9 @@ alias sn := start-notification
 alias st := start-transaction
 alias sg := start-gateway
 
+alias sall := start-all-services
+alias stop := stop-all-docker
+
 list:
   just -l
 
