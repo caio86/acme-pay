@@ -57,7 +57,7 @@ stop-all-docker:
   parallel docker compose -f {} down ::: acme-pay-*-service/docker-compose.yml
 
 clean-docker: stop-all-docker
-  sudo git clean -fx */data
+  sudo git clean -fx *data
 
 start-service := '
   export $(grep -v "^#" .env | xargs)
