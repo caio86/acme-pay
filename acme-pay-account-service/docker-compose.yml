@@ -27,7 +27,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_DB=${DB_DATABASE}
     volumes:
-      - "./data/accounts/postgres:/var/lib/postgres/data"
+      - "../data/accounts/postgresql:/var/lib/postgresql/data"
     ports:
       - "${DB_PORT}:5432"
 
