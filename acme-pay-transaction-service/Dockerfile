@@ -12,6 +12,8 @@ ENV DB_USER=postgres
 
 ENV KAFKA_BROKER=kafka:9092
 
+ENV EUREKA_URL=http://eureka-server:8761/eureka
+
 ENV SERVER_PORT=8080
 
 EXPOSE 8080
