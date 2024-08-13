@@ -10,6 +10,8 @@ ENV DB_PASSWORD=postgres
 ENV DB_PORT=5432
 ENV DB_USER=postgres
 
+ENV EUREKA_URL=http://eureka-server:8761/eureka
+
 ENV SERVER_PORT=8080
 
 EXPOSE 8080
