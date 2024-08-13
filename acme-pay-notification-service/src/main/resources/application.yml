@@ -2,6 +2,9 @@ server:
   port: ${SERVER_PORT:8083}
 
 spring:
+  application:
+    name: notification-service
+
   datasource:
     driver-class-name: org.postgresql.Driver
     password: ${DB_PASSWORD:postgres}
@@ -16,3 +19,8 @@ spring:
     baseline-on-migrate: true
   rabbitmq:
     addresses: ${RABBITMQ_HOST:localhost}:${RABBITMQ_PORT:5672}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}

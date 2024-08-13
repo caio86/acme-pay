@@ -13,6 +13,8 @@ ENV DB_USER=postgres
 ENV RABBITMQ_HOST=rabbitmq-acme-pay
 ENV RABBITMQ_PORT=5672
 
+ENV EUREKA_URL=http://eureka-server:8761/eureka
+
 ENV SERVER_PORT=8080
 
 EXPOSE 8080
