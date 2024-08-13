@@ -1,0 +1,15 @@
+services:
+  eureka-server:
+    container_name: eureka-server
+    image: acme-pay-eureka-server:v1.0 
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      - acme-pay
+    ports:
+      - 8761:8761
+
+networks:
+  acme-pay:
+    external: true
