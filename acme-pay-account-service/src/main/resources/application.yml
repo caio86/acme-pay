@@ -2,6 +2,8 @@ server:
   port: ${SERVER_PORT:8081}
 
 spring:
+  application:
+    name: account-service
   datasource:
     driver-class-name: org.postgresql.Driver
     password: ${DB_PASSWORD:postgres}
@@ -18,3 +20,8 @@ spring:
     addresses: ${RABBITMQ_HOST:localhost}:${RABBITMQ_PORT:5672}
   kafka:
     bootstrap-servers: ${KAFKA_BROKER}
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka}
