@@ -17,6 +17,9 @@ test:
 build:
   mvn clean package
 
+build-docker: build
+  parallel -j6 docker build -t {//}:latest --file {} {//} ::: $(fd Dockerfile)
+
 start-eureka:
   #!/usr/bin/env bash
   set -euxo pipefail
@@ -60,6 +63,7 @@ start-gateway:
 
 start-all-services:
   {{start-service}}
+  just se
   just sa
   just sc
   just sn
