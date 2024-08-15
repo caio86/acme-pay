@@ -44,6 +44,7 @@ jobs:
             echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
           else
             echo "TAG=latest" >> $GITHUB_ENV
+          fi
 
       - name: Build and push Docker image for ${{ matrix.service }}
         uses: docker/build-push-action@v4
