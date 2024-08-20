@@ -18,7 +18,7 @@ build:
   mvn clean package
 
 build-docker: 
-  parallel -j6 -C ":" docker build --build-arg SERVICE_NAME={1} --build-arg SERVICE_PORT={2} -t {1} . ::: {{services}}
+  parallel -j6 -C ":" docker build --build-arg SERVICE_NAME={1} --build-arg SERVICE_PORT={2} -t caio86/{1} . ::: {{services}}
 
 start-eureka:
   #!/usr/bin/env bash

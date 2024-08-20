@@ -1,7 +1,7 @@
 services:
 
   customer-service:
-    image: acme-pay-customer-service
+    image: caio86/acme-pay-customer-service
     container_name: customer-service
     networks:
       - customer-service

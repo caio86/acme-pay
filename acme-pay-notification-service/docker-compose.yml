@@ -1,7 +1,7 @@
 services:
 
   notification-service:
-    image: acme-pay-notification-service
+    image: caio86/acme-pay-notification-service
     container_name: notification-service
     networks:
       - notification-service

@@ -1,7 +1,7 @@
 services:
 
   account-service:
-    image: acme-pay-account-service
+    image: caio86/acme-pay-account-service
     container_name: account-service
     networks:
       - account-service

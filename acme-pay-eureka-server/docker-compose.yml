@@ -1,6 +1,6 @@
 services:
   eureka-server:
-    image: acme-pay-eureka-server
+    image: caio86/acme-pay-eureka-server
     container_name: eureka-server
     networks:
       - acme-pay

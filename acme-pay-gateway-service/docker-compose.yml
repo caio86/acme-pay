@@ -1,6 +1,6 @@
 services:
   gateway-service:
-    image: acme-pay-gateway-service
+    image: caio86/acme-pay-gateway-service
     container_name: gateway-service
     networks:
       - acme-pay

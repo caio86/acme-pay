@@ -1,7 +1,7 @@
 services:
 
   transaction-service:
-    image: acme-pay-transaction-service
+    image: caio86/acme-pay-transaction-service
     container_name: transaction-service
     networks:
       - transaction-service
