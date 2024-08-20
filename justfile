@@ -17,8 +17,8 @@ test:
 build:
   mvn clean package
 
-build-docker: build
-  parallel -j6 docker build -t {//}:latest --file {} {//} ::: $(fd Dockerfile)
+build-docker: 
+  parallel -j6 -C ":" docker build --build-arg SERVICE_NAME={1} --build-arg SERVICE_PORT={2} -t {1} . ::: {{services}}
 
 start-eureka:
   #!/usr/bin/env bash
@@ -75,6 +75,15 @@ stop-all-docker:
 
 clean-docker: stop-all-docker
   sudo git clean -fx *data
+
+services := """
+acme-pay-account-service:8080 \
+acme-pay-customer-service:8080 \
+acme-pay-notification-service:8080 \
+acme-pay-transaction-service:8080 \
+acme-pay-gateway-service:8090 \
+acme-pay-eureka-server:8761
+"""
 
 start-service := '
   export $(grep -v "^#" .env | xargs)
