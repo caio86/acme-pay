@@ -18,7 +18,7 @@
     <module>acme-pay-transaction-service</module>
     <module>acme-pay-notification-service</module>
     <module>acme-pay-gateway-service</module>
-    <module>eureka-server</module>
+    <module>acme-pay-eureka-server</module>
   </modules>
 
   <properties>

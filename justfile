@@ -23,7 +23,7 @@ build-docker: build
 start-eureka:
   #!/usr/bin/env bash
   set -euxo pipefail
-  cd ./eureka-server
+  cd ./acme-pay-eureka-server
   {{start-service}}
 
 # Start docker container and account service
