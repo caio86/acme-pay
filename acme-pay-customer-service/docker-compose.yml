@@ -2,10 +2,7 @@ services:
 
   customer-service:
     container_name: customer-service
-    image: acme-pay-customer-service:v1.0
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: acme-pay-customer-service
     networks:
       - customer-service
       - acme-pay

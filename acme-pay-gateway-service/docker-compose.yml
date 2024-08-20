@@ -1,10 +1,7 @@
 services:
   gateway-service:
     container_name: gateway-service
-    image: acme-pay-gateway-service:v1.0 
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: acme-pay-gateway-service
     networks:
       - acme-pay
     ports:

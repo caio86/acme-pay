@@ -2,13 +2,7 @@ services:
 
   transaction-service:
     container_name: transaction-service
-    image: acme-pay-transaction-service:v1.0
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    networks:
-      - transaction-service
-      - acme-pay
+    image: acme-pay-transaction-service
     environment:
       DB_HOST: transaction-service-db
     ports:
