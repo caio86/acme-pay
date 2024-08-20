@@ -1,15 +1,18 @@
 services:
 
   account-service:
-    container_name: account-service
     image: acme-pay-account-service
+    container_name: account-service
     networks:
       - account-service
       - acme-pay
     environment:
+      DB_DATABASE: account-service
       DB_HOST: account-service-db
-    ports:
-      - "${SERVER_PORT}:8080"
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      SERVER_PORT: 8080
     depends_on:
       - account-db
 

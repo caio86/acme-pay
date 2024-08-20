@@ -1,9 +1,11 @@
 services:
   gateway-service:
-    container_name: gateway-service
     image: acme-pay-gateway-service
+    container_name: gateway-service
     networks:
       - acme-pay
+    environment:
+      SERVER_PORT: 8090
     ports:
       - 8090:8090
 

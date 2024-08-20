@@ -1,9 +1,11 @@
 services:
   eureka-server:
-    container_name: eureka-server
     image: acme-pay-eureka-server
+    container_name: eureka-server
     networks:
       - acme-pay
+    environment:
+      SERVER_PORT: 8761
     ports:
       - 8761:8761
 

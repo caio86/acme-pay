@@ -1,12 +1,18 @@
 services:
 
   transaction-service:
-    container_name: transaction-service
     image: acme-pay-transaction-service
+    container_name: transaction-service
+    networks:
+      - transaction-service
+      - acme-pay
     environment:
+      DB_DATABASE: transaction-service
       DB_HOST: transaction-service-db
-    ports:
-      - "${SERVER_PORT}:8080"
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      SERVER_PORT: 8080
     depends_on:
       - transaction-db
 

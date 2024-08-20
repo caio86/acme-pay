@@ -1,12 +1,18 @@
 services:
 
   notification-service:
-    container_name: notification-service
     image: acme-pay-notification-service
+    container_name: notification-service
+    networks:
+      - notification-service
+      - acme-pay
     environment:
+      DB_DATABASE: notification-service
       DB_HOST: notification-service-db
-    ports:
-      - "${SERVER_PORT}:8080"
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      SERVER_PORT: 8080
     depends_on:
       - notification-db
 

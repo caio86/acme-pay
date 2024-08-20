@@ -1,15 +1,18 @@
 services:
 
   customer-service:
-    container_name: customer-service
     image: acme-pay-customer-service
+    container_name: customer-service
     networks:
       - customer-service
       - acme-pay
     environment:
+      DB_DATABASE: customer-service
       DB_HOST: customer-service-db
-    ports:
-      - "${SERVER_PORT}:8080"
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      SERVER_PORT: 8080
     depends_on:
       - customer-db
 
