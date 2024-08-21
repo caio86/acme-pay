@@ -12,13 +12,13 @@ public class GatewayConfig {
     public RouteLocator gatewayRoutes(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("accounts", r -> r.path("/api/v1/accounts/**")
-                        .uri("http://account-service:8080"))
+                        .uri("lb://account-service"))
                 .route("customers", r -> r.path("/api/v1/customers/**")
-                        .uri("http://customer-service:8080"))
+                        .uri("lb://customer-service"))
                 .route("notifications", r -> r.path("/api/v1/notifications/**")
-                        .uri("http://notification-service:8080"))
+                        .uri("lb://notification-service"))
                 .route("transactions", r -> r.path("/api/v1/transactions/**")
-                        .uri("http://transaction-service:8080"))
+                        .uri("lb://transaction-service"))
                 .build();
     }
 
