@@ -5,6 +5,26 @@ spring:
   application:
     name: api-gateway
 
+  cloud:
+    gateway:
+      routes:
+        - id: accounts
+          uri: lb://account-service
+          predicates:
+            - Path=/api/v1/accounts/**
+        - id: customers
+          uri: lb://customer-service
+          predicates:
+            - Path=/api/v1/customers/**
+        - id: notifications
+          uri: lb://notification-service
+          predicates:
+            - Path=/api/v1/notifications/**
+        - id: transactions
+          uri: lb://transaction-service
+          predicates:
+            - Path=/api/v1/transactions/**
+
 eureka:
   client:
     service-url:
